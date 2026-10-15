@@ -1,0 +1,12 @@
+# Ambiente scaricato dal setup (~9 GB)
+runtime/
+
+# Risultati e log
+*.srt
+app.log
+
+# Temporanei
+__pycache__/
+*.pyc
+*.wav
+_*
