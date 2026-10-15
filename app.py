@@ -2,9 +2,9 @@
 """Traduzione sottotitoli: video (MKV/MP4) -> sottotitoli italiani (GUI portatile).
 
 Pipeline: [sottotitolo incorporato | audio -> Whisper] -> film.<lingua>.srt -> Argos -> film.it.srt
-Lingue sorgente: inglese, spagnolo, russo, ucraino
+Lingue sorgente: inglese, spagnolo, russo, ucraino, francese, polacco
 Uso:  Avvia.bat            (GUI)
-      python app.py --cli film.mkv [--model small|medium|large-v3] [--lang auto|en|es|ru|uk] [--force]
+      python app.py --cli film.mkv [--model small|medium|large-v3] [--lang auto|en|es|ru|uk|fr|pl] [--force]
 """
 import json
 import os
@@ -93,7 +93,8 @@ def probe(mkv):
 
 
 SRC_LANGS = {"en": ("Inglese", ("eng", "en")), "es": ("Spagnolo", ("spa", "es")),
-             "ru": ("Russo", ("rus", "ru")), "uk": ("Ucraino", ("ukr", "uk"))}
+             "ru": ("Russo", ("rus", "ru")), "uk": ("Ucraino", ("ukr", "uk")),
+             "fr": ("Francese", ("fra", "fre", "fr")), "pl": ("Polacco", ("pol", "pl"))}
 LANG_CHOICES = ["Automatica"] + [v[0] for v in SRC_LANGS.values()]
 LANG_BY_NAME = {v[0]: k for k, v in SRC_LANGS.items()}
 
@@ -371,7 +372,7 @@ class Worker(threading.Thread):
             raise RuntimeError("L'audio \u00e8 gi\u00e0 in italiano: i sottotitoli sono in " + en_srt.name)
         if src not in SRC_LANGS:
             raise RuntimeError(f"Lingua rilevata '{src}' non supportata per la traduzione (supportate: inglese, "
-                               f"spagnolo, russo, ucraino). La trascrizione \u00e8 salvata in {en_srt.name}.")
+                               f"spagnolo, russo, ucraino, francese, polacco). La trascrizione \u00e8 salvata in {en_srt.name}.")
         self.log(f"Traduzione {SRC_LANGS[src][0].lower()} \u2192 italiano con Argos (offline)...")
         out = self.translate(subs, src, t_lo, 100)
         it_srt.write_text(srt.compose(out), encoding="utf-8")
@@ -656,7 +657,7 @@ class App:
             parts.append(f"\u2714 audio {SRC_LANGS[k][0].lower()} rilevato")
             ok = True
         else:
-            parts.append("\u26a0 lingua dell'audio non indicata: verr\u00e0 riconosciuta da Whisper (supportate: inglese, spagnolo, russo, ucraino)")
+            parts.append("\u26a0 lingua dell'audio non indicata: verr\u00e0 riconosciuta da Whisper (supportate: inglese, spagnolo, russo, ucraino, francese, polacco)")
             ok = False
         want = lang if lang != "auto" else "en"
         sub = best_sub(info["subs"], want)

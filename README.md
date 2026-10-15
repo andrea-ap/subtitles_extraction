@@ -8,7 +8,7 @@ Funziona **in locale e gratis**: non servono chiavi API né account, e dopo il p
 3. Traduce il testo in italiano con **Argos Translate** (offline).
 4. Salva due file accanto al video: il sottotitolo originale e quello italiano.
 
-Lingue del parlato supportate: **inglese, spagnolo, russo, ucraino** → italiano.
+Lingue del parlato supportate: **inglese, spagnolo, russo, ucraino, francese, polacco** → italiano.
 
 ## Requisiti
 
@@ -61,16 +61,16 @@ runtime\python\python.exe mkv2sub_it.py "C:\Film\film.mkv" --model medium --lang
 | Opzione | Significato |
 |---|---|
 | `--model small\|medium\|large-v3` | modello Whisper (predefinito `small` da CLI) |
-| `--lang auto\|en\|es\|ru\|uk` | lingua del parlato |
+| `--lang auto\|en\|es\|ru\|uk\|fr\|pl` | lingua del parlato |
 | `--force` | ignora i sottotitoli incorporati e trascrive l'audio |
 
 ## Limiti e problemi comuni
 
 - **Sottotitoli "bruciati" nelle immagini** (hardsub) non si possono estrarre: il programma trascrive l'audio, ma
   quelli originali restano visibili nel video.
-- La traduzione è automatica: è adatta a seguire il film, ma qualche frase può risultare letterale. Russo e ucraino
+- La traduzione è automatica: è adatta a seguire il film, ma qualche frase può risultare letterale. Russo, ucraino, francese e polacco
   passano dall'inglese, lo spagnolo dal portoghese.
-- Se la lingua rilevata non è tra le quattro supportate, viene salvata solo la trascrizione originale.
+- Se la lingua rilevata non è tra quelle supportate, viene salvata solo la trascrizione originale.
 - La GPU non parte: il programma riprova da solo sulla CPU. Aggiorna il driver NVIDIA se succede sempre.
 - Qualcosa non funziona: guarda il file `app.log` nella cartella del programma.
 - Primo avvio fallito: controlla la connessione, poi elimina `runtime\` e rilancia `Avvia.bat`.

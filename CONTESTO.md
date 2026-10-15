@@ -4,7 +4,7 @@ Note tecniche per chi riprende il lavoro. L'uso da parte dell'utente è nel [REA
 
 ## Obiettivo
 Dato un video (`.mkv`, `.mp4`, `.m4v`, `.avi`, `.mov`, `.webm`) produrre `film.it.srt`, con tempi sincronizzati, in
-modo **portatile, gratuito e offline** (dopo il primo avvio). Lingue sorgente: `en`, `es`, `ru`, `uk`.
+modo **portatile, gratuito e offline** (dopo il primo avvio). Lingue sorgente: `en`, `es`, `ru`, `uk`, `fr`, `pl`.
 
 ## Flusso (`app.py`, classe `Worker.pipeline`)
 ```
@@ -38,7 +38,7 @@ film.<lang>.srt  ──► Argos Translate (<lang> → it) ──► film.it.srt
   ctranslate2 4.8.3.
 - **Solo Argos**: Google Translate (via `deep-translator`) dava `429` su questa rete e DeepL richiede una chiave;
   sono stati rimossi. Argos è offline, senza limiti, qualità inferiore ma sufficiente.
-- **Percorsi Argos** (`argos_get`): russo e ucraino → inglese → italiano; **spagnolo → portoghese → inglese → italiano**
+- **Percorsi Argos** (`argos_get`): russo, ucraino, francese e polacco → inglese → italiano; **spagnolo → portoghese → inglese → italiano**
   perché il modello `es→en` v1.9 è difettoso (ripete "mainstre..." all'infinito, anche riscaricato).
 - **GUI non bloccante**: il lavoro gira in `Worker` (thread) e comunica con la GUI tramite `queue` (`poll()` ogni 150 ms).
   Annulla = `threading.Event` controllato nei cicli.
@@ -57,5 +57,5 @@ Deve creare `prova.en.srt` e `prova.it.srt`. Per russo/ucraino/spagnolo serve un
 - Una sola lingua parlata per file; nessuna modalità batch su più file.
 
 ## Sviluppi possibili
-Altre lingue Argos (fr, de, pt...), elaborazione batch di una cartella, selezione manuale di sottotitoli a immagine
+Altre lingue Argos (de, pt, ...), elaborazione batch di una cartella, selezione manuale di sottotitoli a immagine
 con OCR, traduzione con contesto (frasi unite) o con un modello più grande.
