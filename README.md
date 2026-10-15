@@ -10,6 +10,12 @@ Funziona **in locale e gratis**: non servono chiavi API né account, e dopo il p
 
 Lingue del parlato supportate: **inglese, spagnolo, russo, ucraino, francese, polacco** → italiano.
 
+| Lingua parlata | Percorso di traduzione | Modelli da scaricare (una volta) |
+|---|---|---|
+| Inglese | inglese → italiano | ~100 MB |
+| Russo, ucraino, francese, polacco | lingua → inglese → italiano | ~100 MB + 100 MB |
+| Spagnolo | spagnolo → portoghese → inglese → italiano | ~300 MB in più |
+
 ## Requisiti
 
 - Windows 10 o 11 (64 bit)
